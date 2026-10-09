@@ -1,19 +1,26 @@
-# JARVIS Móvil — PWA 1.0
+# JARVIS 2.0 para Android (PWA)
 
-Esta versión es una aplicación web instalable, no un APK. Incluye comandos básicos de texto, voz sintetizada y reconocimiento de voz si el navegador lo permite. No incorpora aún un modelo de IA.
+## Actualizar desde el celular
+1. Abre https://github.com/202213688g-design/jarvis-android en Chrome e inicia sesión.
+2. Pulsa **Add file → Upload files** (en móvil puede estar dentro del menú de tres puntos).
+3. **Descomprime este ZIP** y sube los archivos que contiene a la **raíz** del repositorio (no subas el ZIP ni la carpeta contenedora). Los archivos `index.html`, `manifest.webmanifest`, `sw.js`, `icon.svg`, `icon-192.png`, `icon-512.png` y `README.md` reemplazan los anteriores; `app.js` es nuevo.
+4. Confirma con **Commit changes**. GitHub Pages publicará la nueva versión automáticamente. Espera unos minutos y abre https://202213688g-design.github.io/jarvis-android/ . Si ves la versión anterior, cierra la aplicación y recarga la página (o borra caché del sitio).
+5. En Chrome: menú ⋮ → **Instalar aplicación** o **Añadir a pantalla de inicio**.
 
-## Instalar desde Android sin computadora
+## Funciones
+- Chat con comandos locales y enlaces a búsquedas.
+- Reconocimiento de voz si Chrome lo permite; requiere permisos y puede necesitar internet.
+- Respuestas por síntesis de voz del navegador (la voz disponible depende del celular).
+- Personalidad configurable y memoria editable guardada localmente en `localStorage`.
+- Exportación de datos y eliminación del historial/memoria.
+- Integración opcional con servidor de IA externo vía HTTPS.
 
-1. Descarga y descomprime este ZIP en tu celular.
-2. Para instalar como aplicación, **debes publicar el contenido de la carpeta en un hosting HTTPS** (por ejemplo, mediante un repositorio GitHub y GitHub Pages). Abrir `index.html` directamente desde Archivos no permite instalar la PWA correctamente.
-3. Abre la dirección HTTPS publicada en Chrome para Android.
-4. Usa el menú ⋮ → **Añadir a pantalla de inicio** o **Instalar aplicación** (según aparezca).
-5. Concede permiso de micrófono cuando se solicite. El reconocimiento de voz depende del navegador y puede requerir conexión a internet.
+## IA real: contrato del servidor
+El sitio de GitHub Pages es estático y **no contiene claves API**. Para IA real configura un servidor propio y seguro que acepte `POST` JSON con `{message, memory, personality, history}` y responda `{ "reply": "texto" }`. El servidor debe permitir CORS exclusivamente desde tu dominio GitHub Pages y autenticar solicitudes; CORS por sí solo NO es autenticación. El servidor debe guardar la clave del proveedor de IA en sus variables secretas y aplicar límites de uso. No introduzcas claves privadas en el campo de URL ni en GitHub.
 
-## Publicación opcional con GitHub Pages
-
-Crea un repositorio público en github.com, sube **los archivos de esta carpeta en la raíz del repositorio** y en Settings → Pages elige Deploy from a branch → main / (root). Espera la publicación y abre la URL HTTPS indicada en Pages. Esto puede hacerse desde el navegador del celular, aunque subir varios archivos puede ser incómodo. No subas contraseñas ni claves privadas.
+Si no tienes servidor, **JARVIS sigue funcionando en modo local** y no finge ser una IA avanzada. Los mensajes y memoria solo salen del dispositivo si configuras un servidor externo.
 
 ## Limitaciones
-
-No controla el sistema Android ni escucha en segundo plano. Los comandos funcionan sin IA externa. Algunas funciones de voz requieren internet y/o soporte del navegador. No hay servidor remoto ni cuenta requerida.
+- No es una APK nativa. El navegador no puede controlar libremente otras apps ni escuchar permanentemente en segundo plano.
+- La memoria es local a este navegador/dispositivo y se pierde si borras los datos del sitio.
+- No proporciona diagnósticos médicos, hackeo, pilotaje autónomo ni control físico de hardware.
